@@ -1,10 +1,20 @@
 package com.alex.graphics.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
 class UtilsTest {
+	@Test
+	void testNull() {
+		assertNull(Utils.firstCharToUpper(null));
+	}
+	
+	@Test
+	void testBlank() {
+		assertEquals("", Utils.firstCharToUpper(""));
+	}
 
 	@Test
 	void base() {
