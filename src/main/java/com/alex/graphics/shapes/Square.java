@@ -2,6 +2,9 @@ package com.alex.graphics.shapes;
 
 import java.awt.Graphics2D;
 
+/**
+ * @author Alex Vazquez <vazqueza2000@gmail.com>
+ */
 public class Square extends Shape {
 
 	private double x;
