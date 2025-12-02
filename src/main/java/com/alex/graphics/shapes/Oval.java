@@ -36,6 +36,10 @@ public class Oval extends Shape {
 	public void draw(Graphics2D g2d) {
 		g2d.drawOval((int)x, (int)y, (int)width, (int)height);
 		//TODO: Rotate
+		if (rotate != 0d) {
+			
+		}
+
 	}
 
 }

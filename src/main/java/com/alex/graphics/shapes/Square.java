@@ -28,6 +28,10 @@ public class Square extends Shape {
 	public void draw(Graphics2D g2d) {
 		g2d.drawRect((int)x, (int)y, (int)side, (int)side);
 		//TODO: Rotate
+		if (rotate != 0d) {
+			
+		}
+
 	}
 
 }
