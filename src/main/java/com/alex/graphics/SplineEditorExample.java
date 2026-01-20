@@ -15,7 +15,7 @@ public class SplineEditorExample extends JFrame {
 
 	public SplineEditorExample() {
 		setTitle("Editable Spline on Image Example");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		SplinePanel panel = new SplinePanel();
 		add(panel);

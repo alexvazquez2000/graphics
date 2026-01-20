@@ -51,7 +51,6 @@ public class LineDrawingPanel extends JPanel {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				//System.out.println(e.getX() + ", " + e.getY());
 				for(Line2D.Double line : lines) {
 					if ( ((int)line.x1) ==e.getX() && ((int)line.y1) ==e.getY()) {
 						System.out.println("matches line");
@@ -103,7 +102,7 @@ public class LineDrawingPanel extends JPanel {
 		LineDrawingPanel panel = new LineDrawingPanel();
 		frame.add(panel);
 		frame.setSize(600, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 }

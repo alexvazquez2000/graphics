@@ -44,13 +44,13 @@ public class BezierCurvePanel extends JPanel {
 
 		g2d.setColor(Color.GRAY);
 		g2d.drawLine((int) startX, (int) startY, (int) control1X, (int) control1Y);
-		//g2d.drawLine((int) control1X, (int) control1Y, (int) control2X, (int) control2Y);
+		//g2d.drawLine((int) control1X, (int) control1Y, (int) control2X, (int) control2Y)
 		g2d.drawLine((int) control2X, (int) control2Y, (int) endX, (int) endY);
 	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Bezier Curve Demo");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.add(new BezierCurvePanel());
 		frame.setSize(400, 400);
 		frame.setLocationRelativeTo(null);
