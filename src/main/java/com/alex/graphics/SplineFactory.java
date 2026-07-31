@@ -224,7 +224,7 @@ class BezierSpline extends Spline {
 	 * @param nParts        Number of parts in generated spline.
 	 */
 	BezierSpline(double[] controlPoints, int nParts) {
-		controlPoints_ = controlPoints;
+		this.controlPoints_ = controlPoints;
 		nParts_ = nParts;
 	}
 
@@ -329,7 +329,7 @@ class CubicSpline extends Spline {
 
 		// Endpoints are added three times to get them include in the
 		// generated array
-		controlPoints_ = new double[controlPoints.length + 12];
+		this.controlPoints_ = new double[controlPoints.length + 12];
 		System.arraycopy(controlPoints, 0, controlPoints_, 6, controlPoints.length);
 
 		controlPoints_[0] = controlPoints_[6];
@@ -440,11 +440,12 @@ class CatmullRomSpline extends CubicSpline {
 		super(controlPoints, nParts);
 	}
 
+	@Override
 	protected void initialize(double[] controlPoints, int nParts) {
 		nParts_ = nParts;
 
 		// Endpoints are added twice to force in the generated array
-		controlPoints_ = new double[controlPoints.length + 6];
+		this.controlPoints_ = new double[controlPoints.length + 6];
 		System.arraycopy(controlPoints, 0, controlPoints_, 3, controlPoints.length);
 
 		controlPoints_[0] = controlPoints_[3];
@@ -456,6 +457,7 @@ class CatmullRomSpline extends CubicSpline {
 		controlPoints_[controlPoints_.length - 1] = controlPoints_[controlPoints_.length - 4];
 	}
 
+	@Override
 	protected double blend(int i, double t) {
 		if (i == -2)
 			return ((-t + 2) * t - 1) * t / 2;
