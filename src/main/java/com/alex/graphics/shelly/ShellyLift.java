@@ -29,56 +29,24 @@ class LineDrawingPanel extends JPanel {
 		double cd = 36.0d;
 		double cd_degrees = 30.0d;
 		
-		
 		int wheelCenterX = 5;
 		int wheelCenterY = 5;
-		drawOval(g, 0, 0, wheelCenterX * 2, wheelCenterY *2);
 		
 		//---------------------------------------
+		LiftFrame lift = new LiftFrame(wheelCenterX, wheelCenterY, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
+		//draw the wheel only on first
+		drawOval(g, 0, 0, wheelCenterX * 2, wheelCenterY *2);
 		System.out.println("Picking Shelly");
-		int centerX = (int)(Math.cos(Math.toRadians(cb_degrees)) * cb) + wheelCenterX;
-		int centerY = (int)(Math.sin(Math.toRadians(cb_degrees)) * cb) + wheelCenterY;
-		//from axel to center
-		drawLine(g, wheelCenterX, wheelCenterY, centerX, centerY, "Axel to center");
-		
-		int aX = (int)(Math.cos(Math.toRadians(ca_degrees)) * ca) + centerX;
-		int aY = (int)(Math.sin(Math.toRadians(ca_degrees)) * ca) + centerY;
-		//from center to pickup point
-		drawLine(g, centerX, centerY, aX, aY, "Center to pick end");
-		int aY1 = aY;
-		
-		int dX = (int)(Math.cos(Math.toRadians(cd_degrees)) * cd) + centerX;
-		int dY = (int)(Math.sin(Math.toRadians(cd_degrees)) * cd) + centerY;
-		//from center to handle
-		drawLine(g, centerX, centerY, dX, dY, "Center to handle");
-		
-		
-		drawGripper(g, aX, aY);
+		lift.draw(this, g);
+		drawGripper(g, lift.getAX(), lift.getAY());
 		//---------------------------------------
 		System.out.println("\nLifting Shelly (must clear pool which is 16\")");
-		
 		int turnAngle = 40;
+		LiftFrame liftLoaded = new LiftFrame(lift, turnAngle);
 		g.setColor(Color.RED);
-		cb_degrees -= turnAngle;
-		centerX = (int)(Math.cos(Math.toRadians(cb_degrees)) * cb) + wheelCenterX;
-		centerY = (int)(Math.sin(Math.toRadians(cb_degrees)) * cb) + wheelCenterY;
-		//from axel to center
-		drawLine(g, wheelCenterX, wheelCenterY, centerX, centerY, "Axel to center");
+		liftLoaded.draw(this, g);
 		
-		ca_degrees -= turnAngle;
-		aX = (int)(Math.cos(Math.toRadians(ca_degrees)) * ca) + centerX;
-		aY = (int)(Math.sin(Math.toRadians(ca_degrees)) * ca) + centerY;
-		//from center to pickup point
-		drawLine(g, centerX, centerY, aX, aY, "Center to pick end");
-		int aY2 = aY - aY1;
-		
-		cd_degrees -= turnAngle;
-		dX = (int)(Math.cos(Math.toRadians(cd_degrees)) * cd) + centerX;
-		dY = (int)(Math.sin(Math.toRadians(cd_degrees)) * cd) + centerY;
-		//from center to handle
-		drawLine(g, centerX, centerY, dX, dY, "Center to handle");
-		
-		System.out.println("Lift to clear pool = " + aY2);
+		//System.out.println("Lift to clear pool = " + aY2);
 	}
 
 	private void drawGripper(Graphics g, int aX, int aY) {
@@ -116,7 +84,7 @@ class LineDrawingPanel extends JPanel {
 		
 	}
 
-	private void drawOval(Graphics g,int x, int y, int width, int height ) {
+	public void drawOval(Graphics g,int x, int y, int width, int height ) {
 		System.out.println(" Circle (" + x + "," + y + ") with W=" + width + ", h=" + height );
 		int w2 = width * scale;
 		int h2 = height * scale;
@@ -125,7 +93,7 @@ class LineDrawingPanel extends JPanel {
 		g.drawOval(x2, y2, w2, h2);
 	}
 
-	private void drawLine(Graphics g, int i, int j, int centerX, int centerY, String comment) {
+	public void drawLine(Graphics g, int i, int j, int centerX, int centerY, String comment) {
 		System.out.println("(" + i + "," + j + ") to (" + centerX + "," + centerY + ") " + comment );
 		g.drawLine(i * scale + xOffset, getHeight() - j * scale - yOffset,
 				centerX * scale  + xOffset, getHeight() - centerY * scale - yOffset);
