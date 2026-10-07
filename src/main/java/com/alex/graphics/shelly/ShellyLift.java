@@ -46,7 +46,20 @@ class LineDrawingPanel extends JPanel {
 		g.setColor(Color.RED);
 		liftLoaded.draw(this, g);
 		
-		//System.out.println("Lift to clear pool = " + aY2);
+		System.out.println("Lift to clear pool = " + (liftLoaded.getAY() - lift.getAY()) + "\n\n");
+		
+		g.setColor(Color.BLACK);
+		LiftFrame liftB = new LiftFrame(80, 5, 12.0d, 40.0d, 42, 160, 49, 40);
+		drawOval(g, 80 -wheelCenterX , 0, wheelCenterX * 2, wheelCenterY *2);
+		liftB.draw(this, g);
+		
+		System.out.println("\n-------------\nModel B");
+		turnAngle = 25;
+		LiftFrame liftBLoaded = new LiftFrame(liftB, turnAngle);
+		g.setColor(Color.RED);
+		liftBLoaded.draw(this, g);
+		System.out.println("Lift to clear pool = " + (liftBLoaded.getAY() - liftB.getAY()) + " <<-- must be >18\" \n\n");
+		
 	}
 
 	private void drawGripper(Graphics g, int aX, int aY) {
@@ -106,7 +119,7 @@ public class ShellyLift {
 		// 2. Set up the window frame
 		JFrame frame = new JFrame("Java Swing Draw Line Example");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500, 400);
+		frame.setSize(800, 400);
 
 		// 3. Add your custom panel to the frame
 		LineDrawingPanel panel = new LineDrawingPanel();
