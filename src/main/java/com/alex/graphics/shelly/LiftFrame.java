@@ -25,6 +25,7 @@ public class LiftFrame {
 	
 	public LiftFrame(int wheelCenterX, int wheelCenterY, double cb, double cbDegrees, double ca, double caDegrees, double cd, double cdDegrees) {
 		this.wheelCenterX = wheelCenterX;
+		//wheelCenterY is always same as the radius
 		this.wheelCenterY = wheelCenterY;
 		
 		this.cb = cb;
@@ -47,7 +48,7 @@ public class LiftFrame {
 		this.cdDegrees = lift.cdDegrees - turnAngle;
 	}
 
-	public void draw(LineDrawingPanel lineDrawingPanel, Graphics g) {
+	public void drawModelA(LineDrawingPanel lineDrawingPanel, Graphics g) {
 		int centerX = (int)(Math.cos(Math.toRadians(cbDegrees)) * cb) + wheelCenterX;
 		int centerY = (int)(Math.sin(Math.toRadians(cbDegrees)) * cb) + wheelCenterY;
 		//from axel to center
@@ -62,7 +63,31 @@ public class LiftFrame {
 		int dY = (int)(Math.sin(Math.toRadians(cdDegrees)) * cd) + centerY;
 		//from center to handle
 		lineDrawingPanel.drawLine(g, centerX, centerY, dX, dY, "Center to handle");
+	}
 
+	public void drawModelC(LineDrawingPanel lineDrawingPanel, Graphics g) {
+		int centerX = (int)(Math.cos(Math.toRadians(cbDegrees)) * cb) + wheelCenterX;
+		int centerY = (int)(Math.sin(Math.toRadians(cbDegrees)) * cb) + wheelCenterY;
+		//from axel to center
+		lineDrawingPanel.drawLine(g, wheelCenterX, wheelCenterY, centerX, centerY, "Axel to center");
+		
+		//draw another line towards the back where the handle will attach
+		int rearX = (int)(Math.cos(Math.toRadians(cbDegrees - 45.0d)) * cb) + wheelCenterX;
+		int rearY = (int)(Math.sin(Math.toRadians(cbDegrees - 45.0d)) * cb) + wheelCenterY;
+		//from axel to center
+		lineDrawingPanel.drawLine(g, wheelCenterX, wheelCenterY, rearX, rearY, "Axel to rear center");
+		lineDrawingPanel.drawLine(g, centerX, centerY, rearX, rearY, "center to rear center");
+		
+		
+		this.aX = (int)(Math.cos(Math.toRadians(caDegrees)) * ca) + centerX;
+		this.aY = (int)(Math.sin(Math.toRadians(caDegrees)) * ca) + centerY;
+		//from center to pickup point
+		lineDrawingPanel.drawLine(g, centerX, centerY, aX, aY, "Center to pick end");
+		
+		int dX = (int)(Math.cos(Math.toRadians(cdDegrees)) * cd) + rearX;
+		int dY = (int)(Math.sin(Math.toRadians(cdDegrees)) * cd) + rearY;
+		//from center to handle
+		lineDrawingPanel.drawLine(g, rearX, rearY, dX, dY, "Center to handle");
 	}
 
 	public int getAX() {

@@ -20,45 +20,76 @@ class LineDrawingPanel extends JPanel {
 		//from wheel axel up at an angle to center
 		double cb = 24.0d;
 		double cb_degrees = 120.0d;
-		
 		//pickup end to center
 		double ca = 24.0d;
 		double ca_degrees = 180.0d;
-		
 		//center to handle
 		double cd = 36.0d;
 		double cd_degrees = 30.0d;
-		
 		int wheelCenterX = 5;
-		int wheelCenterY = 5;
-		
+		int wheelRadius = 5;
 		//---------------------------------------
-		LiftFrame lift = new LiftFrame(wheelCenterX, wheelCenterY, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
+		LiftFrame lift = new LiftFrame(wheelCenterX, wheelRadius, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
 		//draw the wheel only on first
-		drawOval(g, 0, 0, wheelCenterX * 2, wheelCenterY *2);
+		drawOval(g, wheelCenterX -wheelRadius , 0, wheelRadius * 2, wheelRadius *2);
 		System.out.println("Picking Shelly");
-		lift.draw(this, g);
+		lift.drawModelA(this, g);
 		drawGripper(g, lift.getAX(), lift.getAY());
-		//---------------------------------------
 		System.out.println("\nLifting Shelly (must clear pool which is 16\")");
+		
 		int turnAngle = 40;
 		LiftFrame liftLoaded = new LiftFrame(lift, turnAngle);
 		g.setColor(Color.RED);
-		liftLoaded.draw(this, g);
+		liftLoaded.drawModelA(this, g);
 		
-		System.out.println("Lift to clear pool = " + (liftLoaded.getAY() - lift.getAY()) + "\n\n");
-		
-		g.setColor(Color.BLACK);
-		LiftFrame liftB = new LiftFrame(80, 5, 12.0d, 40.0d, 42, 160, 49, 40);
-		drawOval(g, 80 -wheelCenterX , 0, wheelCenterX * 2, wheelCenterY *2);
-		liftB.draw(this, g);
-		
+		System.out.println("Model A Lift to clear pool = " + (liftLoaded.getAY() - lift.getAY()) + " <<-- must be >18\" \n");
+		//---------------------------------------
+		{
 		System.out.println("\n-------------\nModel B");
-		turnAngle = 25;
+		g.setColor(Color.BLUE);
+		//from wheel axel up at an angle to center
+		cb = 20.0d;
+		cb_degrees = 40.0d;
+		//pickup end to center
+		ca = 42.0d;
+		ca_degrees = 160.0d;
+		//center to handle
+		cd = 49.0d;
+		cd_degrees = 40.0d;
+		wheelCenterX = 80;
+		LiftFrame liftB = new LiftFrame(wheelCenterX, wheelRadius, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
+		drawOval(g, wheelCenterX -wheelRadius , 0, wheelRadius * 2, wheelRadius *2);
+		liftB.drawModelA(this, g);
+		
+		//turnAngle = 25;
 		LiftFrame liftBLoaded = new LiftFrame(liftB, turnAngle);
 		g.setColor(Color.RED);
-		liftBLoaded.draw(this, g);
-		System.out.println("Lift to clear pool = " + (liftBLoaded.getAY() - liftB.getAY()) + " <<-- must be >18\" \n\n");
+		liftBLoaded.drawModelA(this, g);
+		System.out.println("Model B Lift to clear pool = " + (liftBLoaded.getAY() - liftB.getAY()) + " <<-- must be >18\" \n");
+		}
+		//---------------------------------------
+		System.out.println("\n-------------\nModel C");
+		cb = 32.0d;
+		cb_degrees = 120;
+		//pickup end to center
+		ca = 32.0d;
+		ca_degrees = 170.0d;
+		//center to handle
+		cd = 36.0d;
+		cd_degrees = 30.0d;
+		wheelCenterX = 160;
+		
+		g.setColor(Color.BLUE);
+		LiftFrame liftC = new LiftFrame(wheelCenterX, wheelRadius, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
+		drawOval(g, wheelCenterX -wheelRadius , 0, wheelRadius * 2, wheelRadius *2);
+		liftC.drawModelC(this, g);
+		
+		//turnAngle = 35;
+		LiftFrame liftCLoaded = new LiftFrame(liftC, turnAngle);
+		g.setColor(Color.RED);
+		liftCLoaded.drawModelC(this, g);
+		System.out.println("Model C Lift to clear pool = " + (liftCLoaded.getAY() - liftC.getAY()) + " <<-- must be >18\" \n");
+		//---------------------------------------
 		
 	}
 
@@ -98,7 +129,7 @@ class LineDrawingPanel extends JPanel {
 	}
 
 	public void drawOval(Graphics g,int x, int y, int width, int height ) {
-		System.out.println(" Circle (" + x + "," + y + ") with W=" + width + ", h=" + height );
+		//System.out.println(" Circle (" + x + "," + y + ") with W=" + width + ", h=" + height );
 		int w2 = width * scale;
 		int h2 = height * scale;
 		int x2 = x * scale + xOffset;
@@ -107,7 +138,7 @@ class LineDrawingPanel extends JPanel {
 	}
 
 	public void drawLine(Graphics g, int i, int j, int centerX, int centerY, String comment) {
-		System.out.println("(" + i + "," + j + ") to (" + centerX + "," + centerY + ") " + comment );
+		//System.out.println("(" + i + "," + j + ") to (" + centerX + "," + centerY + ") " + comment );
 		g.drawLine(i * scale + xOffset, getHeight() - j * scale - yOffset,
 				centerX * scale  + xOffset, getHeight() - centerY * scale - yOffset);
 		
@@ -119,7 +150,7 @@ public class ShellyLift {
 		// 2. Set up the window frame
 		JFrame frame = new JFrame("Java Swing Draw Line Example");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800, 400);
+		frame.setSize(1100, 400);
 
 		// 3. Add your custom panel to the frame
 		LineDrawingPanel panel = new LineDrawingPanel();
