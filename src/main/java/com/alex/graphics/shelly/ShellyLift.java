@@ -5,6 +5,7 @@ import java.awt.*;
 
 // 1. Create a custom panel extending JPanel
 class LineDrawingPanel extends JPanel {
+	private static final long serialVersionUID = -7760857003255861549L;
 	private int scale = 4;
 	private int xOffset = 160;
 	private int yOffset = 10;
@@ -19,17 +20,17 @@ class LineDrawingPanel extends JPanel {
 
 		//from wheel axel up at an angle to center
 		double cb = 24.0d;
-		double cb_degrees = 120.0d;
+		double cbDegrees = 120.0d;
 		//pickup end to center
 		double ca = 24.0d;
-		double ca_degrees = 180.0d;
+		double caDegrees = 180.0d;
 		//center to handle
 		double cd = 36.0d;
 		double cd_degrees = 30.0d;
 		int wheelCenterX = 5;
 		int wheelRadius = 5;
 		//---------------------------------------
-		LiftFrame lift = new LiftFrame(wheelCenterX, wheelRadius, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
+		LiftFrame lift = new LiftFrame(wheelCenterX, wheelRadius, cb, cbDegrees, ca, caDegrees, cd, cd_degrees);
 		//draw the wheel only on first
 		drawOval(g, wheelCenterX -wheelRadius , 0, wheelRadius * 2, wheelRadius *2);
 		System.out.println("Picking Shelly");
@@ -47,17 +48,17 @@ class LineDrawingPanel extends JPanel {
 		{
 		System.out.println("\n-------------\nModel B");
 		g.setColor(Color.BLUE);
-		//from wheel axel up at an angle to center
+		//from wheel axle up at an angle to center
 		cb = 20.0d;
-		cb_degrees = 40.0d;
+		cbDegrees = 40.0d;
 		//pickup end to center
 		ca = 42.0d;
-		ca_degrees = 160.0d;
+		caDegrees = 160.0d;
 		//center to handle
 		cd = 49.0d;
 		cd_degrees = 40.0d;
 		wheelCenterX = 80;
-		LiftFrame liftB = new LiftFrame(wheelCenterX, wheelRadius, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
+		LiftFrame liftB = new LiftFrame(wheelCenterX, wheelRadius, cb, cbDegrees, ca, caDegrees, cd, cd_degrees);
 		drawOval(g, wheelCenterX -wheelRadius , 0, wheelRadius * 2, wheelRadius *2);
 		liftB.drawModelA(this, g);
 		
@@ -70,17 +71,17 @@ class LineDrawingPanel extends JPanel {
 		//---------------------------------------
 		System.out.println("\n-------------\nModel C");
 		cb = 32.0d;
-		cb_degrees = 120;
+		cbDegrees = 120;
 		//pickup end to center
 		ca = 32.0d;
-		ca_degrees = 170.0d;
+		caDegrees = 170.0d;
 		//center to handle
 		cd = 36.0d;
 		cd_degrees = 30.0d;
 		wheelCenterX = 160;
 		
 		g.setColor(Color.BLUE);
-		LiftFrame liftC = new LiftFrame(wheelCenterX, wheelRadius, cb, cb_degrees, ca, ca_degrees, cd, cd_degrees);
+		LiftFrame liftC = new LiftFrame(wheelCenterX, wheelRadius, cb, cbDegrees, ca, caDegrees, cd, cd_degrees);
 		drawOval(g, wheelCenterX -wheelRadius , 0, wheelRadius * 2, wheelRadius *2);
 		liftC.drawModelC(this, g);
 		
